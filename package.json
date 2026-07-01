@@ -1,0 +1,12 @@
+{
+  "name": "bramdev-lp",
+  "version": "1.0.0",
+  "description": "Aarogya Champ Landing Page",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
