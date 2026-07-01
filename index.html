@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>आरोग्य चैंप - हर दिन ऊर्जा, हर दिन आत्मविश्वास!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',Arial,sans-serif;background:#f5f5f5;color:#222;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:30px 20px 20px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(255,215,0,0.08) 0%,transparent 50%);pointer-events:none}
+.hero-badge{display:inline-block;background:linear-gradient(135deg,#ffd700,#ffed4a);color:#1a1a2e;padding:6px 20px;border-radius:50px;font-size:13px;font-weight:700;letter-spacing:0.5px;margin-bottom:16px;box-shadow:0 4px 15px rgba(255,215,0,0.3)}
+.hero h1{font-size:28px;color:#fff;font-weight:900;line-height:1.3;margin-bottom:8px}
+.hero h1 span{color:#ffd700}
+.hero p{font-size:16px;color:rgba(255,255,255,0.8);margin-bottom:20px;font-weight:400}
+.hero-img-wrap{max-width:320px;margin:0 auto 10px;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+.hero-img-wrap img{width:100%;height:auto}
+
+.offer-box{max-width:400px;margin:-20px auto 20px;padding:28px 22px;border-radius:24px;text-align:center;background:linear-gradient(135deg,#8B0000,#ff2b2b);color:#fff;box-shadow:0 15px 40px rgba(139,0,0,0.35);position:relative;z-index:2}
+.offer-badge{display:inline-block;background:#ffd700;color:#000;padding:7px 16px;border-radius:50px;font-size:13px;font-weight:700;margin-bottom:12px}
+.offer-box h2{font-size:30px;margin:0 0 10px;line-height:1.3;font-weight:800}
+.offer-box .mrp{font-size:17px;color:rgba(255,255,255,0.7);margin:5px 0 2px}
+.offer-box .mrp s{color:rgba(255,255,255,0.5)}
+.offer-box .off-badge{display:inline-block;background:#ffd700;color:#c40000;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:800;margin-left:6px;vertical-align:middle}
+.offer-box .price{font-size:48px;font-weight:900;color:#ffd700;margin:5px 0}
+.offer-box .price small{font-size:16px;font-weight:600;color:rgba(255,255,255,0.8)}
+.offer-box .urgency-bar{margin:12px 0 8px;padding:8px 10px;background:rgba(255,255,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px}
+.offer-box .urgency-bar .timer{font-weight:800;color:#ffd700;font-size:18px;letter-spacing:1px}
+.offer-box .stock-bar{height:6px;background:rgba(255,255,255,0.2);border-radius:10px;overflow:hidden;margin:8px 0 4px}
+.offer-box .stock-fill{height:100%;width:72%;background:linear-gradient(90deg,#ffd700,#ffed4a);border-radius:10px;transition:width 1s}
+.offer-box .stock-text{font-size:11px;color:rgba(255,255,255,0.8);margin-bottom:8px}
+.offer-box p{font-size:16px;line-height:1.5;margin:0 0 20px;font-weight:500;opacity:0.95}
+.cta-btn{display:block;width:100%;padding:16px;border-radius:50px;border:none;background:#fff;color:#c40000;font-size:20px;font-weight:800;transition:.3s;animation:pulse 1.5s infinite;box-shadow:0 0 25px rgba(255,255,255,0.35);cursor:pointer;text-decoration:none;font-family:inherit}
+.cta-btn:hover{transform:translateY(-3px);background:#fff8e7}
+.offer-note{margin-top:14px;font-size:13px;opacity:0.9}
+
+.trust-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:16px 0 10px}
+.trust-badge{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.12);padding:8px 14px;border-radius:30px;font-size:12px;font-weight:600;color:#fff;backdrop-filter:blur(4px)}
+.trust-badge svg{flex-shrink:0;width:36px;height:36px}
+.trust-badge span{white-space:nowrap}
+
+.benefits{max-width:500px;margin:0 auto;padding:20px 18px}
+.benefits h3{font-size:22px;font-weight:800;color:#1a1a2e;margin-bottom:18px;text-align:center}
+.benefits h3 span{color:#c40000}
+.benefits-list{list-style:none;padding:0}
+.benefits-list li{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:10px;box-shadow:0 2px 12px rgba(0,0,0,0.06);display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:#333;border-left:4px solid #c40000}
+.benefits-list li .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#8B0000,#ff2b2b);color:#fff;font-size:13px;font-weight:700;flex-shrink:0}
+.benefits-list li .icon{font-size:18px;flex-shrink:0}
+.benefits-img{margin:20px auto;max-width:400px;border-radius:16px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.1)}
+
+.form-section{max-width:480px;margin:0 auto 30px;padding:0 18px}
+.form-box{background:#fff;border-radius:24px;padding:28px 22px;box-shadow:0 8px 30px rgba(0,0,0,0.08)}
+.form-box h3{font-size:20px;font-weight:700;color:#1a1a2e;margin-bottom:20px;text-align:center}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:14px;font-weight:600;color:#555;margin-bottom:5px}
+.form-group label .req{color:#e51919}
+.form-group select,.form-group input{width:100%;padding:14px 16px;border:2px solid #e0e0e0;border-radius:12px;font-size:16px;font-family:inherit;background:#f8f8f8;color:#222;transition:.2s;outline:none;-webkit-appearance:none}
+.form-group select:focus,.form-group input:focus{border-color:#c40000;background:#fff;box-shadow:0 0 0 3px rgba(196,0,0,0.1)}
+.form-group select{background:#f8f8f8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E") no-repeat right 14px center;padding-right:40px}
+.form-group .radio-group{display:flex;flex-direction:column;gap:8px}
+.form-group .radio-group label.radio-label{display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #e0e0e0;border-radius:12px;cursor:pointer;transition:.2s;font-weight:500;font-size:14px;color:#333}
+.form-group .radio-group label.radio-label:hover{border-color:#aaa}
+.form-group .radio-group input[type="radio"]{display:none}
+.form-group .radio-group input[type="radio"]:checked + .radio-label{border-color:#c40000;background:#fff5f5}
+.form-group .radio-group input[type="radio"]:checked + .radio-label::before{background:#c40000;border-color:#c40000}
+.radio-bullet{width:18px;height:18px;border:2px solid #ccc;border-radius:50%;display:inline-block;position:relative;flex-shrink:0}
+input[type="radio"]:checked + .radio-label .radio-bullet{border-color:#c40000}
+input[type="radio"]:checked + .radio-label .radio-bullet::after{content:'';width:10px;height:10px;background:#c40000;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.submit-btn{width:100%;padding:16px;border:none;border-radius:14px;background:linear-gradient(135deg,#c40000,#ff2b2b);color:#fff;font-size:18px;font-weight:700;cursor:pointer;transition:.3s;font-family:inherit;margin-top:5px;box-shadow:0 6px 20px rgba(196,0,0,0.3)}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(196,0,0,0.4)}
+
+.live-order-box{position:fixed;top:60px;right:10px;max-width:300px;width:calc(100% - 20px);padding:14px 16px;background:#fff;border-radius:14px;box-shadow:0 6px 25px rgba(0,0,0,0.18);font-family:'Inter',Arial,sans-serif;z-index:9999;transform:translateX(120%);transition:.5s cubic-bezier(0.34,1.56,0.64,1)}
+.live-order-box.active{transform:translateX(0)}
+.live-order-text{font-size:14px;line-height:1.5;color:#333}
+.live-order-text strong{color:#c40000;font-weight:700}
+
+.footer{text-align:center;padding:20px;color:#888;font-size:12px;border-top:1px solid #eee;margin-top:10px}
+
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+@media(min-width:768px){
+.hero h1{font-size:38px}
+.hero-img-wrap{max-width:380px}
+.offer-box{margin:-30px auto 30px;padding:35px 30px}
+.offer-box h2{font-size:34px}
+.offer-box .price{font-size:52px}
+.benefits h3{font-size:26px}
+.benefits-list li{font-size:16px;padding:16px 20px}
+.form-box{padding:35px 30px}
+.live-order-box{top:80px;right:20px;left:auto;width:300px}
+}
+
+@media(max-width:380px){
+.hero h1{font-size:24px}
+.offer-box h2{font-size:26px}
+.offer-box .price{font-size:40px}
+.cta-btn{font-size:18px;padding:14px}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<div class="hero-badge">&#x1F525; आज ही ऑर्डर करें 70% छूट</div>
+<h1>हर दिन <span>ऊर्जा</span>,<br>हर दिन <span>आत्मविश्वास</span>!</h1>
+<p>बाबा रामदेव के आशीर्वाद से अब हर घर में आयुर्वेदिक ताकत</p>
+<div class="hero-img-wrap">
+<img src="baba_arogya_champ_final.jpg" alt="बाबा रामदेव आरोग्य चैंप के साथ">
+</div>
+</section>
+
+<div class="offer-box">
+<div class="offer-badge">&#x1F525; सिर्फ आज के लिए 70% छूट</div>
+<h2>आरोग्य चैंप</h2>
+<div class="mrp">MRP: <s>&#x20B9;1499</s> <span class="off-badge">70% OFF</span></div>
+<div class="price">&#x20B9;399 <small>/ केवल</small></div>
+<p>प्राकृतिक आयुर्वेदिक फॉर्मूला  &bull;  100% सुरक्षित  &bull;  तुरंत प्रभाव</p>
+<div class="urgency-bar">&#x23F3; ऑफर खत्म होने में: <span class="timer" id="countdown">11:59:59</span></div>
+<div class="stock-text">&#x1F4E6; सिर्फ <strong id="stockCount">28</strong> यूनिट बची हैं</div>
+<div class="stock-bar"><div class="stock-fill" id="stockFill"></div></div>
+<a class="cta-btn" href="#order-form">&#x1F6D2; अभी ऑर्डर करें</a>
+<div class="trust-badges">
+<div class="trust-badge">
+<svg viewBox="0 0 40 40" width="32" height="32"><path d="M20 2L5 12v8c0 8.84 6.16 16.84 15 18 8.84-1.16 15-9.16 15-18v-8L20 2z" fill="#f5f5f5" stroke="#d4a017" stroke-width="1.5"/><path d="M20 8l-3 7-8 1 6 5.5L14 30l6-3.5L26 30l-1-8.5 6-5.5-8-1-3-7z" fill="#d4a017"/></svg>
+<span>आयुष प्रमाणित</span>
+</div>
+<div class="trust-badge">
+<svg viewBox="0 0 40 40" width="32" height="32"><rect x="4" y="8" width="32" height="24" rx="4" fill="#f5f5f5" stroke="#2e7d32" stroke-width="1.5"/><path d="M14 22l4 4 8-8" stroke="#2e7d32" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span>GMP प्रमाणित</span>
+</div>
+<div class="trust-badge">
+<svg viewBox="0 0 40 40" width="32" height="32"><circle cx="20" cy="20" r="16" fill="#f5f5f5" stroke="#2e7d32" stroke-width="1.5"/><path d="M20 8C16 8 12 12 12 16c0 3 2 5 4 6l4 10 4-10c2-1 4-3 4-6 0-4-4-8-8-8z" fill="#4caf50" opacity="0.8"/><path d="M16 15l3 3 5-5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span>100% आयुर्वेदिक</span>
+</div>
+<div class="trust-badge">
+<svg viewBox="0 0 40 40" width="32" height="32"><path d="M20 4L6 12v8c0 7.2 5.6 14.4 14 16 8.4-1.6 14-8.8 14-16v-8L20 4z" fill="#f5f5f5" stroke="#1565c0" stroke-width="1.5"/><path d="M14 20l4 4 8-8" stroke="#1565c0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<span>ISO प्रमाणित</span>
+</div>
+</div>
+<div class="offer-note">&#x26A0;&#xFE0F; यह ऑफर सिर्फ आज के लिए है! कल कीमत वापस &#x20B9;1499 हो जाएगी</div>
+</div>
+
+<section class="benefits">
+<h3>&#x2728; आरोग्य चैंप के <span>फायदे</span></h3>
+<ul class="benefits-list">
+<li><span class="num">1</span> सस्ता और आसानी से उपलब्ध</li>
+<li><span class="num">2</span> सही इस्तेमाल करने पर लगभग 98% तक प्रभावी</li>
+<li><span class="num">3</span> तुरंत मोटाई और साइज का बेहतर अनुभव</li>
+<li><span class="num">4</span> ऊपर से लगभग 2 इंच और साइड से 1 इंच मोटा डिज़ाइन</li>
+<li><span class="num">5</span> लंबाई और मोटाई ज्यादा महसूस होती है</li>
+<li><span class="num">6</span> पार्टनर को अधिक संतुष्टि देने में मदद</li>
+<li><span class="num">7</span> पुरुषों के आत्मविश्वास और परफॉर्मेंस को बढ़ाने वाला अनुभव</li>
+</ul>
+</section>
+
+<section class="form-section" id="order-form">
+<div class="form-box">
+<h3>&#x1F4ED; अभी ऑर्डर करें</h3>
+<form id="orderForm" onsubmit="return handleSubmit(event)">
+<div class="form-group">
+<label>आपकी उम्र कितनी है <span class="req">*</span></label>
+<div id="age-group">
+<label class="radio-label" onclick="selectAge(this)">
+<input type="radio" name="age" value="25-35" required>
+<span class="radio-bullet"></span> 25 से 35 के बीच उम्र
+</label>
+<label class="radio-label" onclick="selectAge(this)">
+<input type="radio" name="age" value="35-45">
+<span class="radio-bullet"></span> 35 से 45 के बीच उम्र
+</label>
+<label class="radio-label" onclick="selectAge(this)">
+<input type="radio" name="age" value="45-55">
+<span class="radio-bullet"></span> 45 से 55 के बीच उम्र
+</label>
+<label class="radio-label" onclick="selectAge(this)">
+<input type="radio" name="age" value="55+">
+<span class="radio-bullet"></span> 55 से अधिक उम्र
+</label>
+</div>
+</div>
+<div class="form-group">
+<label for="name">पूरा नाम <span class="req">*</span></label>
+<input type="text" id="name" name="name" placeholder="अपना नाम लिखें" required>
+</div>
+<div class="form-group">
+<label for="phone">मोबाइल नंबर <span class="req">*</span></label>
+<input type="tel" id="phone" name="phone" placeholder="उदा. 9876543210" pattern="[0-9]{10}" maxlength="10" required>
+</div>
+<div class="form-group">
+<label for="city">शहर का नाम <span class="req">*</span></label>
+<input type="text" id="city" name="city" placeholder="अपने शहर का नाम लिखें" required>
+</div>
+<button type="submit" class="submit-btn">&#x1F4E6; ऑर्डर कन्फर्म करें</button>
+</form>
+<div id="formSuccess" style="display:none;text-align:center;padding:20px 0">
+<div style="font-size:48px;margin-bottom:10px">&#x2705;</div>
+<h3 style="color:#28a745;margin-bottom:8px">ऑर्डर सफलतापूर्वक प्राप्त हुआ!</h3>
+<p style="color:#555;font-size:15px">हमारी टीम जल्द ही आपसे संपर्क करेगी। आपको व्हाट्सएप पर ऑर्डर की जानकारी भेजी जा रही है।</p>
+</div>
+</div>
+</section>
+
+<div class="live-order-box" id="liveOrderBox">
+<div class="live-order-text" id="liveOrderText"></div>
+</div>
+
+<footer class="footer">
+&copy; 2026 आरोग्य चैंप | आयुर्वेदिक उत्पाद - 100% प्राकृतिक
+</footer>
+
+<script>
+const recentOrders=[
+"रोहित सिंह ने दिल्ली से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>6 मिनट पहले ऑर्डर किया &#x1F680;",
+"अमित कुमार ने मुंबई से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>10 मिनट पहले ऑर्डर किया &#x1F680;",
+"राहुल शर्मा ने जयपुर से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>3 मिनट पहले ऑर्डर किया &#x1F680;",
+"विकास सिंह ने लखनऊ से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>8 मिनट पहले ऑर्डर किया &#x1F680;",
+"अर्जुन वर्मा ने पुणे से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>12 मिनट पहले ऑर्डर किया &#x1F680;",
+"दीपक कुमार ने दिल्ली से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>5 मिनट पहले ऑर्डर किया &#x1F680;",
+"सूरज पटेल ने इंदौर से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>2 मिनट पहले ऑर्डर किया &#x1F680;",
+"मनोज यादव ने पटना से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>7 मिनट पहले ऑर्डर किया &#x1F680;",
+"प्रवीण कुमार ने बंगलौर से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>4 मिनट पहले ऑर्डर किया &#x1F680;",
+"हरीश शर्मा ने आगरा से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>9 मिनट पहले ऑर्डर किया &#x1F680;",
+"संजय मिश्रा ने वाराणसी से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>11 मिनट पहले ऑर्डर किया &#x1F680;",
+"आकाश गुप्ता ने गाजियाबाद से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>1 मिनट पहले ऑर्डर किया &#x1F680;",
+"नितिन चौहान ने नागपुर से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>14 मिनट पहले ऑर्डर किया &#x1F680;",
+"प्रशांत तिवारी ने भोपाल से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>6 मिनट पहले ऑर्डर किया &#x1F680;",
+"विजय पाल ने गोरखपुर से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>13 मिनट पहले ऑर्डर किया &#x1F680;",
+"अभिषेक जैन ने सूरत से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>3 मिनट पहले ऑर्डर किया &#x1F680;"
+];
+let orderIndex=0;
+function showOrder(){
+const box=document.getElementById("liveOrderBox");
+const msg=document.getElementById("liveOrderText");
+msg.innerHTML=recentOrders[orderIndex];
+box.classList.add("active");
+setTimeout(()=>box.classList.remove("active"),4000);
+orderIndex=(orderIndex+1)%recentOrders.length;
+}
+setTimeout(showOrder,1500);
+setInterval(showOrder,8000);
+
+function selectAge(el){
+el.closest('#age-group').querySelectorAll('.radio-label').forEach(l=>l.classList.remove('selected'));
+el.classList.add('selected');
+el.querySelector('input[type="radio"]').checked=true;
+}
+
+function handleSubmit(e){
+e.preventDefault();
+const form=e.target;
+const formData=new FormData(form);
+if(!formData.get('age')){alert('कृपया अपनी उम्र चुनें');return false}
+if(!formData.get('name').trim()){alert('कृपया अपना नाम दर्ज करें');return false}
+if(!/^[0-9]{10}$/.test(formData.get('phone'))){alert('कृपया सही मोबाइल नंबर दर्ज करें (10 अंक)');return false}
+if(!formData.get('city').trim()){alert('कृपया अपना शहर दर्ज करें');return false}
+const phone=formData.get('phone');
+const msg=`नया ऑर्डर!%0Aउत्पाद: आरोग्य चैंप (&#x20B9;399)%0Aउम्र: ${formData.get('age')}%0Aनाम: ${formData.get('name')}%0Aफ़ोन: ${phone}%0Aशहर: ${formData.get('city')}`;
+const wa=`https://wa.me/919876543210?text=${msg}`;
+form.style.display='none';
+document.getElementById('formSuccess').style.display='block';
+setTimeout(()=>{window.open(wa,'_blank')},500);
+return false;
+}
+
+document.getElementById('phone').addEventListener('input',function(){this.value=this.value.replace(/\D/g,'')});
+
+// Countdown timer - end of day
+function startCountdown(){
+const now=new Date();
+const end=new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,59);
+const diff=Math.floor((end-now)/1000);
+if(diff>0){
+const h=String(Math.floor(diff/3600)).padStart(2,'0');
+const m=String(Math.floor((diff%3600)/60)).padStart(2,'0');
+const s=String(diff%60).padStart(2,'0');
+document.getElementById('countdown').textContent=`${h}:${m}:${s}`;
+}else{document.getElementById('countdown').textContent='00:00:00'}
+}
+setInterval(startCountdown,1000);
+startCountdown();
+
+// Stock counter - random decrease
+let stock=Math.floor(Math.random()*15)+22;
+setInterval(()=>{
+if(stock>3&&Math.random()>0.6){stock--;document.getElementById('stockCount').textContent=stock;const pct=Math.max(5,Math.round((stock/40)*100));document.getElementById('stockFill').style.width=pct+'%'}
+},18000);
+</script>
+</body>
+</html>
