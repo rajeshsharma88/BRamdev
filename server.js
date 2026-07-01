@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const app = express();
 const PORT = 3000;
 const LEADS_FILE = path.join(__dirname, 'leads.json');
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Accuster1208##';
 const TOKEN = crypto.randomBytes(16).toString('hex');
 
 app.use(express.json());
@@ -68,8 +68,8 @@ app.get('/admin', (req, res) => {
   res.send(`<!DOCTYPE html>
 <html lang="hi">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin Login</title>
-<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,Arial,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.login-box{background:#fff;padding:35px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);width:100%;max-width:380px;text-align:center}.login-box h2{color:#1a1a2e;margin-bottom:20px;font-size:22px}.login-box input{width:100%;padding:14px 16px;border:2px solid #e0e0e0;border-radius:12px;font-size:16px;margin-bottom:16px;outline:none;transition:.2s}.login-box input:focus{border-color:#c40000;box-shadow:0 0 0 3px rgba(196,0,0,0.1)}.login-box button{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#c40000,#ff2b2b);color:#fff;font-size:17px;font-weight:700;cursor:pointer;transition:.3s}.login-box button:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(196,0,0,0.3)}.login-box .hint{margin-top:14px;font-size:13px;color:#888}</style></head>
-<body><div class="login-box"><h2>&#x1F512; Admin Login</h2><form method="POST" action="/admin/login"><input type="password" name="password" placeholder="Password" required><button type="submit">Login</button></form><div class="hint">Default: admin123</div></div></body></html>`);
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,Arial,sans-serif;background:linear-gradient(135deg,#1a1a2e,#16213e);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.login-box{background:#fff;padding:35px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);width:100%;max-width:380px;text-align:center}.login-box h2{color:#1a1a2e;margin-bottom:20px;font-size:22px}.login-box input{width:100%;padding:14px 16px;border:2px solid #e0e0e0;border-radius:12px;font-size:16px;margin-bottom:16px;outline:none;transition:.2s}.login-box input:focus{border-color:#c40000;box-shadow:0 0 0 3px rgba(196,0,0,0.1)}.login-box button{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#c40000,#ff2b2b);color:#fff;font-size:17px;font-weight:700;cursor:pointer;transition:.3s}.login-box button:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(196,0,0,0.3)}</style></head>
+<body><div class="login-box"><h2>&#x1F512; Admin Login</h2><form method="POST" action="/admin/login"><input type="password" name="password" placeholder="Password" required><button type="submit">Login</button></form></div></body></html>`);
 });
 
 app.get('/admin/dashboard', requireAuth, (req, res) => {
@@ -114,6 +114,6 @@ app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
   console.log(`  Admin login:    http://localhost:${PORT}/admin`);
   console.log(`  Form submits:   POST /api/lead`);
-  console.log(`Default password: admin123`);
+  console.log(`Password set in .env`);
   console.log(`Set env ADMIN_PASSWORD to change it`);
 });
