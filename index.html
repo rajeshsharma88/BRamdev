@@ -200,7 +200,8 @@ input[type="radio"]:checked + .radio-label .radio-bullet::after{content:'';width
 <section class="form-section" id="order-form">
 <div class="form-box">
 <h3>&#x1F4ED; अभी ऑर्डर करें</h3>
-<form id="orderForm" onsubmit="return handleSubmit(event)">
+<form id="orderForm" onsubmit="return handleSubmit(event)" netlify name="leads" data-netlify="true">
+<input type="hidden" name="form-name" value="leads">
 <div class="form-group">
 <label>आपकी उम्र कितनी है <span class="req">*</span></label>
 <div id="age-group">
@@ -298,7 +299,10 @@ if(!formData.get('name').trim()){alert('कृपया अपना नाम �
 if(!/^[0-9]{10}$/.test(formData.get('phone'))){alert('कृपया सही मोबाइल नंबर दर्ज करें (10 अंक)');return false}
 if(!formData.get('city').trim()){alert('कृपया अपना शहर दर्ज करें');return false}
 const phone=formData.get('phone');
-const leadData={age:formData.get('age'),name:formData.get('name'),phone,city:formData.get('city')};
+const leadData={id:Date.now(),age:formData.get('age'),name:formData.get('name'),phone,city:formData.get('city'),product:'Aarogya Champ',price:'₹399',timestamp:new Date().toLocaleString('hi-IN',{timeZone:'Asia/Kolkata'})};
+// Save to localStorage (for admin page)
+try{const existing=JSON.parse(localStorage.getItem('leads')||'[]');existing.push(leadData);localStorage.setItem('leads',JSON.stringify(existing))}catch(e){}
+// Submit to server if available
 fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(leadData)}).catch(()=>{});
 const msg=`नया ऑर्डर!%0Aउत्पाद: आरोग्य चैंप (&#x20B9;399)%0Aउम्र: ${formData.get('age')}%0Aनाम: ${formData.get('name')}%0Aफ़ोन: ${phone}%0Aशहर: ${formData.get('city')}`;
 const wa=`https://wa.me/919876543210?text=${msg}`;

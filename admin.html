@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin - Leads Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,Arial,sans-serif;background:#f5f5f5;min-height:100vh}
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-box{background:#fff;padding:35px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);width:100%;max-width:380px;text-align:center}
+.login-box h2{color:#1a1a2e;margin-bottom:20px;font-size:22px}
+.login-box input{width:100%;padding:14px 16px;border:2px solid #e0e0e0;border-radius:12px;font-size:16px;margin-bottom:16px;outline:none;transition:.2s}
+.login-box input:focus{border-color:#c40000;box-shadow:0 0 0 3px rgba(196,0,0,0.1)}
+.login-box button{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#c40000,#ff2b2b);color:#fff;font-size:17px;font-weight:700;cursor:pointer;transition:.3s;font-family:inherit}
+.login-box button:hover{transform:translateY(-2px)}
+.login-box .error{color:#c40000;font-size:14px;margin-top:10px;display:none}
+.dash-wrap{display:none;padding:20px;max-width:1000px;margin:0 auto}
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.dash-header h1{font-size:22px;color:#1a1a2e}
+.dash-header .actions{display:flex;gap:10px}
+.btn{display:inline-block;padding:10px 20px;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s;font-family:inherit}
+.btn-download{background:#28a745;color:#fff}
+.btn-download:hover{background:#218838}
+.btn-logout{background:#6c757d;color:#fff}
+.btn-logout:hover{background:#5a6268}
+.stats{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.stat-card{background:#fff;padding:16px 22px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,0.05);flex:1;min-width:120px;text-align:center}
+.stat-card .num{font-size:28px;font-weight:800;color:#c40000}
+.stat-card .label{font-size:13px;color:#888;margin-top:4px}
+.table-wrap{background:#fff;border-radius:16px;box-shadow:0 2px 15px rgba(0,0,0,0.06);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:#f8f8f8;color:#555;font-weight:600;text-align:left;padding:14px 16px;border-bottom:2px solid #eee}
+td{padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333}
+tr:hover td{background:#fafafa}
+.empty{text-align:center;padding:40px;color:#888;font-size:16px}
+@media(max-width:600px){th,td{font-size:13px;padding:10px 12px}.dash-header h1{font-size:18px}}
+</style>
+</head>
+<body>
+
+<div class="login-wrap" id="loginWrap">
+<div class="login-box">
+<h2>&#x1F512; Admin Login</h2>
+<input type="password" id="passwordInput" placeholder="Password" onkeydown="if(event.key==='Enter')login()">
+<button onclick="login()">Login</button>
+<div class="error" id="errorMsg">&#x274C; गलत पासवर्ड</div>
+</div>
+</div>
+
+<div class="dash-wrap" id="dashWrap">
+<div class="dash-header">
+<h1>&#x1F4CB; Leads Dashboard</h1>
+<div class="actions">
+<button class="btn btn-download" onclick="downloadCSV()">&#x1F4E5; Download CSV</button>
+<button class="btn btn-logout" onclick="logout()">Logout</button>
+</div>
+</div>
+<div class="stats" id="statsRow"></div>
+<button class="btn btn-download" onclick="refreshLeads()" style="margin-bottom:16px">&#x1F504; Refresh from Netlify</button>
+<div class="table-wrap" id="tableWrap"><div class="empty">&#x1F4ED; Loading leads...</div></div>
+</div>
+
+<script>
+const PASSWORD = 'admin123';
+
+function login() {
+  if (document.getElementById('passwordInput').value === PASSWORD) {
+    document.getElementById('loginWrap').style.display = 'none';
+    document.getElementById('dashWrap').style.display = 'block';
+    document.getElementById('errorMsg').style.display = 'none';
+    renderLeads();
+  } else {
+    document.getElementById('errorMsg').style.display = 'block';
+  }
+}
+
+function logout() {
+  document.getElementById('dashWrap').style.display = 'none';
+  document.getElementById('loginWrap').style.display = 'flex';
+  document.getElementById('passwordInput').value = '';
+}
+
+function getLeads() {
+  try { return JSON.parse(localStorage.getItem('leads') || '[]'); } catch { return []; }
+}
+
+function renderLeads() {
+  const leads = getLeads();
+  const cities = [...new Set(leads.map(l => l.city))];
+  const phones = [...new Set(leads.map(l => l.phone))];
+  document.getElementById('statsRow').innerHTML =
+    '<div class="stat-card"><div class="num">' + leads.length + '</div><div class="label">Total Leads</div></div>' +
+    '<div class="stat-card"><div class="num">' + cities.length + '</div><div class="label">Cities</div></div>' +
+    '<div class="stat-card"><div class="num">' + phones.length + '</div><div class="label">Unique Phones</div></div>';
+
+  if (!leads.length) {
+    document.getElementById('tableWrap').innerHTML = '<div class="empty">&#x1F4ED; No leads yet. Share your site to start collecting leads!</div>';
+    return;
+  }
+
+  const rows = leads.map(l =>
+    '<tr><td>' + l.id + '</td><td>' + l.name + '</td><td>' + l.phone + '</td><td>' + l.city + '</td><td>' + l.age + '</td><td>' + (l.timestamp || '') + '</td></tr>'
+  ).join('');
+  document.getElementById('tableWrap').innerHTML =
+    '<table><thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>City</th><th>Age</th><th>Timestamp</th></tr></thead><tbody>' + rows + '</tbody></table>';
+}
+
+function downloadCSV() {
+  const leads = getLeads();
+  if (!leads.length) { alert('No leads to download'); return; }
+  const header = 'ID,Name,Phone,City,Age,Product,Price,Timestamp\n';
+  const rows = leads.map(l =>
+    l.id + ',"' + l.name + '",' + l.phone + ',"' + l.city + '","' + l.age + '","' + (l.product || 'Aarogya Champ') + '","' + (l.price || '₹399') + '","' + (l.timestamp || '') + '"'
+  ).join('\n');
+  const csv = '\uFEFF' + header + rows;
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'leads.csv';
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+function refreshLeads() {
+  document.getElementById('tableWrap').innerHTML = '<div class="empty">&#x1F504; Checking Netlify submissions...</div>';
+  // Netlify Forms doesn't have a public API - leads are in the Netlify dashboard
+  // Check localStorage for locally submitted leads
+  renderLeads();
+  alert('Leads from this browser shown below.\n\nView all Netlify form submissions at:\nhttps://app.netlify.com/sites/aarogyachamp/forms');
+}
+</script>
+</body>
+</html>
