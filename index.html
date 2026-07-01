@@ -254,6 +254,7 @@ input[type="radio"]:checked + .radio-label .radio-bullet::after{content:'';width
 </footer>
 
 <script>
+const SHEET_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // Replace after deploying Apps Script
 const recentOrders=[
 "रोहित सिंह ने दिल्ली से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>6 मिनट पहले ऑर्डर किया &#x1F680;",
 "अमित कुमार ने मुंबई से<br><strong>आरोग्य चैंप &#x20B9;399</strong> का<br>10 मिनट पहले ऑर्डर किया &#x1F680;",
@@ -302,8 +303,10 @@ const phone=formData.get('phone');
 const leadData={id:Date.now(),age:formData.get('age'),name:formData.get('name'),phone,city:formData.get('city'),product:'Aarogya Champ',price:'₹399',timestamp:new Date().toLocaleString('hi-IN',{timeZone:'Asia/Kolkata'})};
 // Save to localStorage (for admin page)
 try{const existing=JSON.parse(localStorage.getItem('leads')||'[]');existing.push(leadData);localStorage.setItem('leads',JSON.stringify(existing))}catch(e){}
-// Submit to server if available
+// Submit to local server if available
 fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(leadData)}).catch(()=>{});
+// Push to Google Sheet
+if(SHEET_URL.includes('script.google.com')){fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(leadData)}).catch(()=>{})}
 const msg=`नया ऑर्डर!%0Aउत्पाद: आरोग्य चैंप (&#x20B9;399)%0Aउम्र: ${formData.get('age')}%0Aनाम: ${formData.get('name')}%0Aफ़ोन: ${phone}%0Aशहर: ${formData.get('city')}`;
 const wa=`https://wa.me/919876543210?text=${msg}`;
 form.style.display='none';
