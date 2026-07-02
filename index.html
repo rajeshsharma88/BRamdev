@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>आरोग्य चैंप - हर दिन ऊर्जा, हर दिन आत्मविश्वास!</title>
 <link rel="icon" type="image/png" href="favicon.png">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1324167279697831');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1324167279697831&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -82,11 +99,10 @@ img{max-width:100%;height:auto;display:block}
 .form-group .radio-group label.radio-label{display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #e0e0e0;border-radius:12px;cursor:pointer;transition:.2s;font-weight:500;font-size:14px;color:#333}
 .form-group .radio-group label.radio-label:hover{border-color:#aaa}
 .form-group .radio-group input[type="radio"]{display:none}
-.form-group .radio-group input[type="radio"]:checked + .radio-label{border-color:#c40000;background:#fff5f5}
-.form-group .radio-group input[type="radio"]:checked + .radio-label::before{background:#c40000;border-color:#c40000}
+.form-group .radio-group label.radio-label.selected{border-color:#c40000;background:#fff5f5}
 .radio-bullet{width:18px;height:18px;border:2px solid #ccc;border-radius:50%;display:inline-block;position:relative;flex-shrink:0}
-input[type="radio"]:checked + .radio-label .radio-bullet{border-color:#c40000}
-input[type="radio"]:checked + .radio-label .radio-bullet::after{content:'';width:10px;height:10px;background:#c40000;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.radio-label.selected .radio-bullet{border-color:#c40000}
+.radio-label.selected .radio-bullet::after{content:'';width:10px;height:10px;background:#c40000;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .submit-btn{width:100%;padding:16px;border:none;border-radius:14px;background:linear-gradient(135deg,#c40000,#ff2b2b);color:#fff;font-size:18px;font-weight:700;cursor:pointer;transition:.3s;font-family:inherit;margin-top:5px;box-shadow:0 6px 20px rgba(196,0,0,0.3)}
 .submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(196,0,0,0.4)}
 
@@ -96,6 +112,11 @@ input[type="radio"]:checked + .radio-label .radio-bullet::after{content:'';width
 .live-order-text strong{color:#c40000;font-weight:700}
 
 .footer{text-align:center;padding:20px;color:#888;font-size:12px;border-top:1px solid #eee;margin-top:10px}
+
+.floating-order{position:fixed;left:0;right:0;bottom:0;z-index:9998;display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(135deg,#c40000,#ff2b2b);box-shadow:0 -4px 20px rgba(0,0,0,0.2);text-decoration:none;font-family:inherit;animation:pulse 1.5s infinite}
+.floating-order .fo-text{color:#fff;font-size:16px;font-weight:800}
+.floating-order .fo-price{color:#ffd700;font-size:18px;font-weight:900}
+body{padding-bottom:64px}
 
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
 
@@ -218,7 +239,7 @@ input[type="radio"]:checked + .radio-label .radio-bullet::after{content:'';width
 <input type="hidden" name="form-name" value="leads">
 <div class="form-group">
 <label>आपकी उम्र कितनी है <span class="req">*</span></label>
-<div id="age-group">
+<div id="age-group" class="radio-group">
 <label class="radio-label" onclick="selectAge(this)">
 <input type="radio" name="age" value="25-35" required>
 <span class="radio-bullet"></span> 25 से 35 के बीच उम्र
@@ -266,6 +287,11 @@ input[type="radio"]:checked + .radio-label .radio-bullet::after{content:'';width
 <footer class="footer">
 &copy; 2026 आरोग्य चैंप | आयुर्वेदिक उत्पाद - 100% प्राकृतिक
 </footer>
+
+<a href="#order-form" class="floating-order">
+<span class="fo-text">&#x1F6D2; अभी ऑर्डर करें</span>
+<span class="fo-price">&#x20B9;399 में</span>
+</a>
 
 <script>
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzivZUwVLLePhEOwHDiLNW3vL8OuMScjhJQRZ_Kr6tAMqstbXZTqVaVpxIBY11YlVgp8A/exec';
@@ -321,11 +347,8 @@ try{const existing=JSON.parse(localStorage.getItem('leads')||'[]');existing.push
 fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(leadData)}).catch(()=>{});
 // Push to Google Sheet
 if(SHEET_URL.includes('script.google.com')){fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(leadData)}).catch(()=>{})}
-const msg=`नया ऑर्डर!%0Aउत्पाद: आरोग्य चैंप (&#x20B9;399)%0Aउम्र: ${formData.get('age')}%0Aनाम: ${formData.get('name')}%0Aफ़ोन: ${phone}%0Aशहर: ${formData.get('city')}`;
-const wa=`https://wa.me/919876543210?text=${msg}`;
 form.style.display='none';
 document.getElementById('formSuccess').style.display='block';
-setTimeout(()=>{window.open(wa,'_blank')},500);
 return false;
 }
 
